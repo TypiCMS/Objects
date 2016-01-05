@@ -9,12 +9,7 @@
         }
     ],
     "require": {
-        "typicms/core": "~2.6.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "TypiCMS\\Modules\\Objects\\": "src/"
-        }
+        "laravel/framework": "~5.2.0",
     },
     "minimum-stability": "dev",
     "prefer-stable": true
