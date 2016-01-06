@@ -34,12 +34,11 @@ class Object extends Base
         'title',
         'slug',
         'status',
-        'website',
         'summary',
         'body',
     ];
 
-    protected $appends = ['status', 'title', 'thumb', 'website'];
+    protected $appends = ['status', 'title', 'thumb'];
 
     /**
      * Columns that are file.
