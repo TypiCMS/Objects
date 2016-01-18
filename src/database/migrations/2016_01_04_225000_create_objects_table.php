@@ -31,6 +31,7 @@ class CreateObjectsTable extends Migration
             $table->text('body');
             $table->timestamps();
             $table->unique(['object_id', 'locale']);
+            $table->unique(['locale', 'slug']);
             $table->foreign('object_id')->references('id')->on('objects')->onDelete('cascade');
 
         });
