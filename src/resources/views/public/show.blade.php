@@ -16,4 +16,4 @@
         <div class="body">{!! $model->present()->body !!}</div>
     </article>
 
-@stop
+@endsection
