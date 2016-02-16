@@ -14,6 +14,13 @@ class Object extends Base
     use Translatable;
 
     protected $presenter = 'TypiCMS\Modules\Objects\Presenters\ModulePresenter';
+    
+    /**
+     * Declare any properties that should be hidden from JSON Serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [];
 
     protected $fillable = [
         'image',
