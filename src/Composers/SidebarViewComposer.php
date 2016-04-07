@@ -16,7 +16,7 @@ class SidebarViewComposer
                 $item->icon = config('typicms.objects.sidebar.icon');
                 $item->weight = config('typicms.objects.sidebar.weight');
                 $item->route('admin::index-objects');
-                $item->append('admin::create-objects');
+                $item->append('admin::create-object');
                 $item->authorize(
                     Gate::allows('index-objects')
                 );
