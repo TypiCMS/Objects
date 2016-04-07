@@ -44,18 +44,18 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/objects', ['as' => 'admin.objects.index', 'uses' => 'AdminController@index']);
-            $router->get('admin/objects/create', ['as' => 'admin.objects.create', 'uses' => 'AdminController@create']);
-            $router->get('admin/objects/{object}/edit', ['as' => 'admin.objects.edit', 'uses' => 'AdminController@edit']);
-            $router->post('admin/objects', ['as' => 'admin.objects.store', 'uses' => 'AdminController@store']);
-            $router->put('admin/objects/{object}', ['as' => 'admin.objects.update', 'uses' => 'AdminController@update']);
+            $router->get('admin/objects', 'AdminController@index')->name('admin::index-objects');
+            $router->get('admin/objects/create', 'AdminController@create')->name('admin::create-objects');
+            $router->get('admin/objects/{object}/edit', 'AdminController@edit')->name('admin::edit-objects');
+            $router->post('admin/objects', 'AdminController@store')->name('admin::store-objects');
+            $router->put('admin/objects/{object}', 'AdminController@update')->name('admin::update-objects');
 
             /*
              * API routes
              */
-            $router->get('api/objects', ['as' => 'api.objects.index', 'uses' => 'ApiController@index']);
-            $router->put('api/objects/{object}', ['as' => 'api.objects.update', 'uses' => 'ApiController@update']);
-            $router->delete('api/objects/{object}', ['as' => 'api.objects.destroy', 'uses' => 'ApiController@destroy']);
+            $router->get('api/objects', 'ApiController@index')->name('api::index-objects');
+            $router->put('api/objects/{object}', 'ApiController@update')->name('api::update-objects');
+            $router->delete('api/objects/{object}', 'ApiController@destroy')->name('api::destroy-objects');
         });
     }
 }
