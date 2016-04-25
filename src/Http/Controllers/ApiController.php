@@ -12,7 +12,7 @@ class ApiController extends BaseApiController
 
     /**
      *  Array of endpoints that do not require authorization
-     *  
+     *
      */
     protected $publicEndpoints = [];
 
@@ -29,7 +29,7 @@ class ApiController extends BaseApiController
     public function store()
     {
         $model = $this->repository->create(Request::all());
-        $error = $model ? false : true;
+        $error = $model ? true : false;
 
         return response()->json([
             'error' => $error,
