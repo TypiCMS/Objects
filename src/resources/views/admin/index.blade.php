@@ -8,9 +8,7 @@
 
     @include('core::admin._button-create', ['module' => 'objects'])
 
-    <h1>
-        <span>@{{ models.length }} @choice('objects::global.objects', 2)</span>
-    </h1>
+    <h1>@lang('objects::global.name')</h1>
 
     <div class="btn-toolbar">
         @include('core::admin._lang-switcher')
