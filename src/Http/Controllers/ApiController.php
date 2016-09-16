@@ -5,14 +5,14 @@ namespace TypiCMS\Modules\Objects\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Objects\Models\Object;
-use TypiCMS\Modules\Objects\Repositories\ObjectInterface as Repository;
+use TypiCMS\Modules\Objects\Repositories\EloquentObject as Repository;
 
 class ApiController extends BaseApiController
 {
 
     /**
      *  Array of endpoints that do not require authorization
-     *  
+     *
      */
     protected $publicEndpoints = [];
 

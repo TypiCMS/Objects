@@ -15,7 +15,7 @@ class Object extends Base
 
     protected $presenter = 'TypiCMS\Modules\Objects\Presenters\ModulePresenter';
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'exit'];
 
     public $translatable = [
         'title',

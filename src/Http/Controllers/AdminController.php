@@ -5,11 +5,11 @@ namespace TypiCMS\Modules\Objects\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Objects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Objects\Models\Object;
-use TypiCMS\Modules\Objects\Repositories\ObjectInterface;
+use TypiCMS\Modules\Objects\Repositories\EloquentObject;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(ObjectInterface $object)
+    public function __construct(EloquentObject $object)
     {
         parent::__construct($object);
     }

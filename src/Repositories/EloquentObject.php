@@ -2,13 +2,11 @@
 
 namespace TypiCMS\Modules\Objects\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Objects\Models\Object;
 
-class EloquentObject extends RepositoriesAbstract implements ObjectInterface
+class EloquentObject extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'objects';
+
+    protected $model = Object::class;
 }

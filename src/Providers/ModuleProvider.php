@@ -8,10 +8,8 @@ use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Objects\Models\Object;
 use TypiCMS\Modules\Objects\Models\ObjectTranslation;
-use TypiCMS\Modules\Objects\Repositories\CacheDecorator;
 use TypiCMS\Modules\Objects\Repositories\EloquentObject;
 
 class ModuleProvider extends ServiceProvider
@@ -66,14 +64,6 @@ class ModuleProvider extends ServiceProvider
             $view->page = TypiCMS::getPageLinkedToModule('objects');
         });
 
-        $app->bind('TypiCMS\Modules\Objects\Repositories\ObjectInterface', function (Application $app) {
-            $repository = new EloquentObject(new Object());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], 'objects', 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('Objects', EloquentObject::class);
     }
 }
