@@ -9,7 +9,6 @@ use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Objects\Models\Object;
-use TypiCMS\Modules\Objects\Models\ObjectTranslation;
 use TypiCMS\Modules\Objects\Repositories\EloquentObject;
 
 class ModuleProvider extends ServiceProvider

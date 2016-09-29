@@ -43,18 +43,22 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/objects', 'AdminController@index')->name('admin::index-objects');
-            $router->get('admin/objects/create', 'AdminController@create')->name('admin::create-object');
-            $router->get('admin/objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object');
-            $router->post('admin/objects', 'AdminController@store')->name('admin::store-object');
-            $router->put('admin/objects/{object}', 'AdminController@update')->name('admin::update-object');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+                $router->get('objects', 'AdminController@index')->name('admin::index-objects');
+                $router->get('objects/create', 'AdminController@create')->name('admin::create-object');
+                $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object');
+                $router->post('objects', 'AdminController@store')->name('admin::store-object');
+                $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object');
+            });
 
             /*
              * API routes
              */
-            $router->get('api/objects', 'ApiController@index')->name('api::index-objects');
-            $router->put('api/objects/{object}', 'ApiController@update')->name('api::update-object');
-            $router->delete('api/objects/{object}', 'ApiController@destroy')->name('api::destroy-object');
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+                $router->get('objects', 'ApiController@index')->name('api::index-objects');
+                $router->put('objects/{object}', 'ApiController@update')->name('api::update-object');
+                $router->delete('objects/{object}', 'ApiController@destroy')->name('api::destroy-object');
+            });
         });
     }
 }
