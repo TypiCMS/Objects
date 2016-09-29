@@ -43,7 +43,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
                 $router->get('objects', 'AdminController@index')->name('admin::index-objects');
                 $router->get('objects/create', 'AdminController@create')->name('admin::create-object');
                 $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object');
@@ -54,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * API routes
              */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
                 $router->get('objects', 'ApiController@index')->name('api::index-objects');
                 $router->put('objects/{object}', 'ApiController@update')->name('api::update-object');
                 $router->delete('objects/{object}', 'ApiController@destroy')->name('api::destroy-object');
