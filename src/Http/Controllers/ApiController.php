@@ -9,10 +9,8 @@ use TypiCMS\Modules\Objects\Repositories\ObjectInterface as Repository;
 
 class ApiController extends BaseApiController
 {
-
     /**
-     *  Array of endpoints that do not require authorization
-     *  
+     *  Array of endpoints that do not require authorization.
      */
     protected $publicEndpoints = [];
 
