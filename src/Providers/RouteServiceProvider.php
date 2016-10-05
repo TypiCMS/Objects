@@ -49,15 +49,8 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object');
                 $router->post('objects', 'AdminController@store')->name('admin::store-object');
                 $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object');
-            });
-
-            /*
-             * API routes
-             */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
-                $router->get('objects', 'ApiController@index')->name('api::index-objects');
-                $router->put('objects/{object}', 'ApiController@update')->name('api::update-object');
-                $router->delete('objects/{object}', 'ApiController@destroy')->name('api::destroy-object');
+                $router->patch('objects/{object}', 'AdminController@ajaxUpdate');
+                $router->delete('objects/{object}', 'AdminController@destroy')->name('admin::destroy-object');
             });
         });
     }
