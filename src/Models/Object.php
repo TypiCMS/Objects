@@ -24,12 +24,6 @@ class Object extends Base
 
     protected $fillable = [
         'image',
-        // Translatable columns
-        'title',
-        'slug',
-        'status',
-        'summary',
-        'body',
     ];
 
     /**
@@ -61,9 +55,9 @@ class Object extends Base
      *
      * @return string
      */
-    public function getStatusAttribute()
+    public function getStatusAttribute($value)
     {
-        return $this->status;
+        return $value;
     }
 
     /**
@@ -71,9 +65,9 @@ class Object extends Base
      *
      * @return string title
      */
-    public function getTitleAttribute()
+    public function getTitleAttribute($value)
     {
-        return $this->title;
+        return $value;
     }
 
     /**
