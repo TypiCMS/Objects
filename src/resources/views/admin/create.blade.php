@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', trans('objects::global.New'))
+@section('title', __('objects::global.New'))
 
 @section('main')
 
