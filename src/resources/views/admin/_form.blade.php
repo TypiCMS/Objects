@@ -10,6 +10,6 @@
 
 @include('core::form._title-and-slug')
 {!! TranslatableBootForm::hidden('status')->value(0) !!}
-{!! TranslatableBootForm::checkbox(__('validation.attributes.online'), 'status') !!}
-{!! TranslatableBootForm::textarea(__('validation.attributes.summary'), 'summary')->rows(4) !!}
-{!! TranslatableBootForm::textarea(__('validation.attributes.body'), 'body')->addClass('ckeditor') !!}
+{!! TranslatableBootForm::checkbox(__('Online'), 'status') !!}
+{!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
+{!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
