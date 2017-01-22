@@ -2,7 +2,7 @@
 
 @section('title', __('objects::global.New'))
 
-@section('main')
+@section('content')
 
     @include('core::admin._button-back', ['module' => 'objects'])
     <h1>
