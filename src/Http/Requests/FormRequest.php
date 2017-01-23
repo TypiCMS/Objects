@@ -10,8 +10,8 @@ class FormRequest extends AbstractFormRequest
     {
         return [
             'image' => 'image|max:2000',
-            'title.*' => 'max:255',
-            'slug.*' => 'max:255',
+            'title.*' => 'nullable|max:255',
+            'slug.*' => 'nullable|alpha_dash|max:255',
         ];
     }
 }
