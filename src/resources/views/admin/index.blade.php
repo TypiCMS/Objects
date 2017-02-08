@@ -45,7 +45,7 @@
                     <td>
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
-                    <td>@{{ model.title }}</td>
+                    <td>@{{ model.title | translated }}</td>
                 </tr>
             </tbody>
             <tfoot>
