@@ -6,6 +6,7 @@ use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Objects\Presenters\ModulePresenter;
 
 class Object extends Base
 {
@@ -13,7 +14,7 @@ class Object extends Base
     use Historable;
     use PresentableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\Objects\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
     protected $guarded = ['id', 'exit'];
 
