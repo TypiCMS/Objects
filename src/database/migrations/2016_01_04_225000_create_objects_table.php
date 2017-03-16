@@ -15,7 +15,7 @@ class CreateObjectsTable extends Migration
         Schema::create('objects', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('image')->nullable();
+            $table->integer('image_id')->unsigned()->nullable();
             $table->json('status');
             $table->json('title');
             $table->json('slug');

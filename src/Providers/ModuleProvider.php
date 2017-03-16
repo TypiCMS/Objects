@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\Objects\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
-use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Objects\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Objects\Facades\Objects;
@@ -37,7 +36,6 @@ class ModuleProvider extends ServiceProvider
 
         // Observers
         Object::observe(new SlugObserver());
-        Object::observe(new FileObserver());
     }
 
     public function register()
