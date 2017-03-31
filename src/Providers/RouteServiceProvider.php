@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object');
                 $router->post('objects', 'AdminController@store')->name('admin::store-object');
                 $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object');
-                $router->patch('objects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-object');
+                $router->patch('objects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-object-ajax');
                 $router->delete('objects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-object');
             });
         });
