@@ -18,6 +18,9 @@ class ModuleProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'typicms.objects'
         );
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/permissions.php', 'typicms.permissions'
+        );
 
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['objects' => ['linkable_to_page']], $modules));
