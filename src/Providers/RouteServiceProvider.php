@@ -44,13 +44,13 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
-                $router->get('objects', 'AdminController@index')->name('admin::index-objects');
-                $router->get('objects/create', 'AdminController@create')->name('admin::create-object');
-                $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object');
-                $router->post('objects', 'AdminController@store')->name('admin::store-object');
-                $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object');
-                $router->patch('objects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-object-ajax');
-                $router->delete('objects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-object');
+                $router->get('objects', 'AdminController@index')->name('admin::index-objects')->middleware('can:see-all-objects');
+                $router->get('objects/create', 'AdminController@create')->name('admin::create-object')->middleware('can:create-object');
+                $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object')->middleware('can:update-object');
+                $router->post('objects', 'AdminController@store')->name('admin::store-object')->middleware('can:create-object');
+                $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object')->middleware('can:update-object');
+                $router->patch('objects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-object-ajax')->middleware('can:update-object');
+                $router->delete('objects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-object')->middleware('can:delete-object');
             });
         });
     }
