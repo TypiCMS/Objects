@@ -26,7 +26,7 @@ class PublicController extends BasePublicController
     }
 
     /**
-     * Show news.
+     * Show resource.
      *
      * @return \Illuminate\View\View
      */

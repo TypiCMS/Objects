@@ -74,7 +74,7 @@ class Object extends Base
     }
 
     /**
-     * A news can have many files.
+     * Has many files.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
