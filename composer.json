@@ -11,6 +11,14 @@
     "require": {
         "laravel/framework": "~5.4.0"
     },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan translations:add /vendor/typicms/Objects/src/resources/lang"
+        ],
+        "post-update-cmd": [
+            "php artisan translations:add /vendor/typicms/Objects/src/resources/lang"
+        ]
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }

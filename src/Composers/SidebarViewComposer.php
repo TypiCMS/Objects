@@ -17,7 +17,7 @@ class SidebarViewComposer
         $view->sidebar->group(__('Content'), function (SidebarGroup $group) {
             $group->id = 'content';
             $group->weight = 30;
-            $group->addItem(__('objects::global.name'), function (SidebarItem $item) {
+            $group->addItem(__('Objects'), function (SidebarItem $item) {
                 $item->id = 'objects';
                 $item->icon = config('typicms.objects.sidebar.icon');
                 $item->weight = config('typicms.objects.sidebar.weight');
