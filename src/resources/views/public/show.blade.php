@@ -1,19 +1,19 @@
 @extends('core::public.master')
 
-@section('title', $model->title.' – '.trans('objects::global.name').' – '.$websiteTitle)
+@section('title', $model->title.' – '.__('Objects').' – '.$websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbUrl())
 @section('bodyClass', 'body-objects body-object-'.$model->id.' body-page body-page-'.$page->id)
 
-@section('main')
+@section('content')
 
     @include('core::public._btn-prev-next', ['module' => 'Objects', 'model' => $model])
-    <article>
-        <h1>{{ $model->title }}</h1>
+    <article class="object">
+        <h1 class="object-title">{{ $model->title }}</h1>
         {!! $model->present()->thumb(null, 200) !!}
-        <p class="summary">{{ nl2br($model->summary) }}</p>
-        <div class="body">{!! $model->present()->body !!}</div>
+        <p class="object-summary">{{ nl2br($model->summary) }}</p>
+        <div class="object-body">{!! $model->present()->body !!}</div>
     </article>
 
 @endsection

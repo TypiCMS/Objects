@@ -5,11 +5,11 @@ namespace TypiCMS\Modules\Objects\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Objects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Objects\Models\Object;
-use TypiCMS\Modules\Objects\Repositories\ObjectInterface;
+use TypiCMS\Modules\Objects\Repositories\EloquentObject;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(ObjectInterface $object)
+    public function __construct(EloquentObject $object)
     {
         parent::__construct($object);
     }
@@ -21,7 +21,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->all([], true);
+        $models = $this->repository->with('files')->findAll();
         app('JavaScript')->put('models', $models);
 
         return view('objects::admin.index');
@@ -34,7 +34,8 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->getModel();
+        $model = $this->repository->createModel();
+        app('JavaScript')->put('model', $model);
 
         return view('objects::admin.create')
             ->with(compact('model'));
@@ -49,6 +50,8 @@ class AdminController extends BaseAdminController
      */
     public function edit(Object $object)
     {
+        app('JavaScript')->put('model', $object);
+
         return view('objects::admin.edit')
             ->with(['model' => $object]);
     }
@@ -77,8 +80,38 @@ class AdminController extends BaseAdminController
      */
     public function update(Object $object, FormRequest $request)
     {
-        $this->repository->update($request->all());
+        $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $object);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Objects\Models\Object $object
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Object $object)
+    {
+        $deleted = $this->repository->delete($object);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
+    }
+
+    /**
+     * List models.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function files(Object $object)
+    {
+        $data = [
+            'models' => $object->files,
+        ];
+
+        return response()->json($data, 200);
     }
 }

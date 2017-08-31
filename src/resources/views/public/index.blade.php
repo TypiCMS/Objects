@@ -2,14 +2,12 @@
 
 @section('bodyClass', 'body-objects body-objects-index body-page body-page-'.$page->id)
 
-@section('main')
+@section('content')
 
     {!! $page->present()->body !!}
 
-    @include('galleries::public._galleries', ['model' => $page])
+    @include('files::public._files', ['model' => $page])
 
-    @if ($models->count())
-    @include('objects::public._list', ['items' => $models])
-    @endif
+    @includeWhen($models->count() > 0, 'objects::public._list', ['items' => $models])
 
 @endsection

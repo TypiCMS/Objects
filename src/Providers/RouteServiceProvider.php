@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Objects\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 
 class RouteServiceProvider extends ServiceProvider
@@ -20,23 +21,21 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
+     * @return null
      */
-    public function map(Router $router)
+    public function map()
     {
-        $router->group(['namespace' => $this->namespace], function (Router $router) {
+        Route::group(['namespace' => $this->namespace], function (Router $router) {
 
             /*
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('objects')) {
                 $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (config('translatable.locales') as $lang) {
-                    if ($page->translate($lang)->status && $uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['as' => $lang.'.objects', 'uses' => 'PublicController@index']);
-                        $router->get($uri.'/{slug}', $options + ['as' => $lang.'.objects.slug', 'uses' => 'PublicController@show']);
+                foreach (locales() as $lang) {
+                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
+                        $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-objects');
+                        $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::object');
                     }
                 }
             }
@@ -44,18 +43,16 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/objects', 'AdminController@index')->name('admin::index-objects');
-            $router->get('admin/objects/create', 'AdminController@create')->name('admin::create-object');
-            $router->get('admin/objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object');
-            $router->post('admin/objects', 'AdminController@store')->name('admin::store-object');
-            $router->put('admin/objects/{object}', 'AdminController@update')->name('admin::update-object');
-
-            /*
-             * API routes
-             */
-            $router->get('api/objects', 'ApiController@index')->name('api::index-objects');
-            $router->put('api/objects/{object}', 'ApiController@update')->name('api::update-object');
-            $router->delete('api/objects/{object}', 'ApiController@destroy')->name('api::destroy-object');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
+                $router->get('objects', 'AdminController@index')->name('admin::index-objects')->middleware('can:see-all-objects');
+                $router->get('objects/create', 'AdminController@create')->name('admin::create-object')->middleware('can:create-object');
+                $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object')->middleware('can:update-object');
+                $router->get('objects/{object}/files', 'AdminController@files')->name('admin::edit-object-files')->middleware('can:update-object');
+                $router->post('objects', 'AdminController@store')->name('admin::store-object')->middleware('can:create-object');
+                $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object')->middleware('can:update-object');
+                $router->patch('objects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-object-ajax')->middleware('can:update-object');
+                $router->delete('objects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-object')->middleware('can:delete-object');
+            });
         });
     }
 }

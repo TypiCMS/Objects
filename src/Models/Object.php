@@ -2,36 +2,24 @@
 
 namespace TypiCMS\Modules\Objects\Models;
 
-use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Objects\Presenters\ModulePresenter;
 
 class Object extends Base
 {
+    use HasTranslations;
     use Historable;
     use PresentableTrait;
-    use Translatable;
 
-    protected $presenter = 'TypiCMS\Modules\Objects\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
-    /**
-     * Declare any properties that should be hidden from JSON Serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+    protected $guarded = ['id', 'exit'];
 
-    protected $fillable = [
-        'image',
-    ];
-
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
+    public $translatable = [
         'title',
         'slug',
         'status',
@@ -39,35 +27,40 @@ class Object extends Base
         'body',
     ];
 
-    protected $appends = ['status', 'title', 'thumb'];
+    protected $appends = ['image', 'thumb', 'title_translated', 'status_translated'];
 
     /**
-     * Columns that are file.
-     *
-     * @var array
-     */
-    public $attachments = [
-        'image',
-    ];
-
-    /**
-     * Append status attribute from translation table.
+     * Append title_translated attribute.
      *
      * @return string
      */
-    public function getStatusAttribute($value)
+    public function getTitleTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('title', config('typicms.content_locale', $locale));
     }
 
     /**
-     * Append title attribute from translation table.
+     * Append status_translated attribute.
      *
-     * @return string title
+     * @return string
      */
-    public function getTitleAttribute($value)
+    public function getStatusTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('status', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * Append image attribute.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return $this->files->first();
     }
 
     /**
@@ -78,5 +71,16 @@ class Object extends Base
     public function getThumbAttribute()
     {
         return $this->present()->thumbSrc(null, 22);
+    }
+
+    /**
+     * Has many files.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function files()
+    {
+        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
+            ->orderBy('model_has_files.position');
     }
 }

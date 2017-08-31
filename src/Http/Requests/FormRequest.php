@@ -9,9 +9,9 @@ class FormRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'image'   => 'image|max:2000',
-            '*.title' => 'max:255',
-            '*.slug'  => 'max:255',
+            'image_id' => 'nullable|integer',
+            'title.*' => 'nullable|max:255',
+            'slug.*' => 'nullable|alpha_dash|max:255',
         ];
     }
 }
