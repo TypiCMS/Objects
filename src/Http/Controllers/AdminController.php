@@ -22,7 +22,6 @@ class AdminController extends BaseAdminController
     public function index()
     {
         $models = $this->repository->with('files')->findAll();
-        app('JavaScript')->put('models', $models);
 
         return view('objects::admin.index');
     }
@@ -83,35 +82,5 @@ class AdminController extends BaseAdminController
         $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $object);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \TypiCMS\Modules\Objects\Models\Object $object
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(Object $object)
-    {
-        $deleted = $this->repository->delete($object);
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
-    }
-
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function files(Object $object)
-    {
-        $data = [
-            'models' => $object->files,
-        ];
-
-        return response()->json($data, 200);
     }
 }
