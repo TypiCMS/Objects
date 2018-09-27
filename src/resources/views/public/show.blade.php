@@ -9,11 +9,14 @@
 @section('content')
 
     @include('core::public._btn-prev-next', ['module' => 'Objects', 'model' => $model])
+
     <article class="object">
         <h1 class="object-title">{{ $model->title }}</h1>
         {!! $model->present()->thumb(null, 200) !!}
         <p class="object-summary">{{ nl2br($model->summary) }}</p>
         <div class="object-body">{!! $model->present()->body !!}</div>
+        @include('files::public._documents')
+        @include('files::public._images')
     </article>
 
 @endsection
