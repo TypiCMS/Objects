@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', __('Events'))
+@section('title', __('Objects'))
 
 @section('content')
 
