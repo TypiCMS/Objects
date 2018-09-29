@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Object\Http\Controllers;
+namespace TypiCMS\Modules\Objects\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
