@@ -28,10 +28,6 @@ class ModuleProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'objects');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/objects'),
-        ], 'views');
-
         AliasLoader::getInstance()->alias('Objects', Objects::class);
 
         // Observers
