@@ -50,15 +50,4 @@ class Object extends Base
     {
         return $this->present()->thumbSrc(null, 22);
     }
-
-    /**
-     * Has many files.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function files()
-    {
-        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
-            ->orderBy('model_has_files.position');
-    }
 }
