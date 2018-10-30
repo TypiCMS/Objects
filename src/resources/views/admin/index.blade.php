@@ -11,6 +11,7 @@
     translatable-fields="status,title"
     table="objects"
     title="objects"
+    include="images"
     :searchable="['title']"
     :sorting="['-id']">
 
