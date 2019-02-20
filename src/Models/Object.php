@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\Objects\Models;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Traits\HasFiles;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Modules\Objects\Presenters\ModulePresenter;
@@ -28,16 +29,16 @@ class Object extends Base
         'body',
     ];
 
-    protected $appends = ['image', 'thumb'];
+    protected $appends = ['thumb'];
 
     /**
-     * Append image attribute.
+     * This model belongs to one image.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getImageAttribute()
+    public function image()
     {
-        return $this->images->first();
+        return $this->belongsTo(File::class, 'image_id');
     }
 
     /**
