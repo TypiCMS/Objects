@@ -7,11 +7,11 @@
 <item-list
     url-base="/api/objects"
     locale="{{ config('typicms.content_locale') }}"
-    fields="id"
+    fields="id,image_id"
     translatable-fields="status,title"
     table="objects"
     title="objects"
-    include="images"
+    include="image"
     :searchable="['title']"
     :sorting="['-id']">
 

@@ -21,6 +21,8 @@ class Object extends Base
 
     protected $guarded = ['id', 'exit'];
 
+    protected $appends = ['thumb'];
+
     public $translatable = [
         'title',
         'slug',
@@ -29,7 +31,15 @@ class Object extends Base
         'body',
     ];
 
-    protected $appends = ['thumb'];
+    /**
+     * Append thumb attribute.
+     *
+     * @return string
+     */
+    public function getThumbAttribute()
+    {
+        return $this->present()->thumbSrc(null, 44);
+    }
 
     /**
      * This model belongs to one image.
@@ -39,15 +49,5 @@ class Object extends Base
     public function image()
     {
         return $this->belongsTo(File::class, 'image_id');
-    }
-
-    /**
-     * Append thumb attribute.
-     *
-     * @return string
-     */
-    public function getThumbAttribute()
-    {
-        return $this->present()->thumbSrc(null, 22);
     }
 }
