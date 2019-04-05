@@ -12,7 +12,7 @@
 
     <article class="object">
         <h1 class="object-title">{{ $model->title }}</h1>
-        <img src="{!! $model->present()->image(null, 200) !!}" alt="">
+        <img class="object-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
         <p class="object-summary">{{ nl2br($model->summary) }}</p>
         <div class="object-body">{!! $model->present()->body !!}</div>
         @include('files::public._documents')
