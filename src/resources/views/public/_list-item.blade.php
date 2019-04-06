@@ -1,3 +1,4 @@
+@include('objects::public._json-ld')
 <li class="object-list-item">
     <a class="object-list-item-link" href="{{ $object->uri() }}" title="{{ $object->title }}">
         <span class="object-list-item-title">{!! $object->title !!}</span>
