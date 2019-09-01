@@ -3,15 +3,9 @@
 namespace TypiCMS\Modules\Objects\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Objects\Repositories\EloquentObject;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(EloquentObject $object)
-    {
-        parent::__construct($object);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +13,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->all();
+        $models = $this->model->all();
 
         return view('objects::public.index')
             ->with(compact('models'));
@@ -32,7 +26,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->bySlug($slug);
+        $model = $this->model->bySlug($slug);
 
         return view('objects::public.show')
             ->with(compact('model'));

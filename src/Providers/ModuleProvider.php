@@ -9,7 +9,6 @@ use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Objects\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Objects\Facades\Objects;
 use TypiCMS\Modules\Objects\Models\Object;
-use TypiCMS\Modules\Objects\Repositories\EloquentObject;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -55,6 +54,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        $app->bind('Objects', EloquentObject::class);
+        $app->bind('Objects', Object::class);
     }
 }

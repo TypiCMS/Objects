@@ -5,15 +5,9 @@ namespace TypiCMS\Modules\Objects\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Objects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Objects\Models\Object;
-use TypiCMS\Modules\Objects\Repositories\EloquentObject;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(EloquentObject $object)
-    {
-        parent::__construct($object);
-    }
-
     /**
      * List models.
      *
@@ -31,7 +25,7 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->createModel();
+        $model = new;
 
         return view('objects::admin.create')
             ->with(compact('model'));
@@ -59,7 +53,7 @@ class AdminController extends BaseAdminController
      */
     public function store(FormRequest $request)
     {
-        $object = $this->repository->create($request->all());
+        $object = ::create($request->all());
 
         return $this->redirect($request, $object);
     }
@@ -74,7 +68,7 @@ class AdminController extends BaseAdminController
      */
     public function update(Object $object, FormRequest $request)
     {
-        $this->repository->update($request->id, $request->all());
+        ::update($request->id, $request->all());
 
         return $this->redirect($request, $object);
     }
