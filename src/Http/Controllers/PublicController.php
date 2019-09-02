@@ -2,31 +2,23 @@
 
 namespace TypiCMS\Modules\Objects\Http\Controllers;
 
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\Objects\Models\Object;
 
 class PublicController extends BasePublicController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
-        $models = $this->model->all();
+        $models = Object::with('image')->get();
 
         return view('objects::public.index')
             ->with(compact('models'));
     }
 
-    /**
-     * Show resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show($slug)
+    public function show($slug): View
     {
-        $model = $this->model->bySlug($slug);
+        $model = Object::where(column('slug'), $slug)->firstOrFails();
 
         return view('objects::public.show')
             ->with(compact('model'));
