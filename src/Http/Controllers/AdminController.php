@@ -2,73 +2,43 @@
 
 namespace TypiCMS\Modules\Objects\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Objects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Objects\Models\Object;
 
 class AdminController extends BaseAdminController
 {
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
         return view('objects::admin.index');
     }
 
-    /**
-     * Create form for a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(): View
     {
-        $model = new;
+        $model = new Object;
 
         return view('objects::admin.create')
             ->with(compact('model'));
     }
 
-    /**
-     * Edit form for the specified resource.
-     *
-     * @param \TypiCMS\Modules\Objects\Models\Object $object
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(Object $object)
+    public function edit(Object $object): View
     {
         return view('objects::admin.edit')
             ->with(['model' => $object]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \TypiCMS\Modules\Objects\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(FormRequest $request)
+    public function store(FormRequest $request): RedirectResponse
     {
-        $object = ::create($request->all());
+        $object = Object::create($request->all());
 
         return $this->redirect($request, $object);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \TypiCMS\Modules\Objects\Models\Object             $object
-     * @param \TypiCMS\Modules\Objects\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Object $object, FormRequest $request)
+    public function update(Object $object, FormRequest $request): RedirectResponse
     {
-        ::update($request->id, $request->all());
+        $object->update($request->id, $request->all());
 
         return $this->redirect($request, $object);
     }

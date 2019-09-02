@@ -2,7 +2,9 @@
 
 namespace TypiCMS\Modules\Objects\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
@@ -12,7 +14,7 @@ use TypiCMS\Modules\Objects\Models\Object;
 
 class ApiController extends BaseApiController
 {
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         $data = QueryBuilder::for(Object::class)
             ->allowedFilters([
@@ -25,7 +27,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Object $object, Request $request)
+    protected function updatePartial(Object $object, Request $request): JsonResponse
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -42,11 +44,9 @@ class ApiController extends BaseApiController
             $object->$key = $value;
         }
         $saved = $object->save();
-
-        $this->model->forgetCache();
     }
 
-    public function destroy(Object $object)
+    public function destroy(Object $object): JsonResponse
     {
         $deleted = $object->delete();
 
@@ -55,18 +55,18 @@ class ApiController extends BaseApiController
         ]);
     }
 
-    public function files(Object $object)
+    public function files(Object $object): JsonResponse
     {
         return $object->files;
     }
 
-    public function attachFiles(Object $object, Request $request)
+    public function attachFiles(Object $object, Request $request): JsonResponse
     {
-        return $this->model->attachFiles($object, $request);
+        return $object->attachFiles($request);
     }
 
-    public function detachFile(Object $object, File $file)
+    public function detachFile(Object $object, File $file): array
     {
-        return $this->model->detachFile($object, $file);
+        return $object->detachFile($file);
     }
 }
