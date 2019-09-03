@@ -31,22 +31,12 @@ class Object extends Base
         'body',
     ];
 
-    /**
-     * Append thumb attribute.
-     *
-     * @return string
-     */
-    public function getThumbAttribute()
+    public function getThumbAttribute(): string
     {
         return $this->present()->image(null, 54);
     }
 
-    /**
-     * This model belongs to one image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function image()
+    public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_id');
     }
