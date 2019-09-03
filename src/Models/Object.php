@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Objects\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
