@@ -10,7 +10,7 @@ class PublicController extends BasePublicController
 {
     public function index(): View
     {
-        $models = Object::with('image')->get();
+        $models = Object::published()->with('image')->get();
 
         return view('objects::public.index')
             ->with(compact('models'));
@@ -18,7 +18,7 @@ class PublicController extends BasePublicController
 
     public function show($slug): View
     {
-        $model = Object::where(column('slug'), $slug)->firstOrFail();
+        $model = Object::published()->bySlug($slug)->firstOrFail();
 
         return view('objects::public.show')
             ->with(compact('model'));
