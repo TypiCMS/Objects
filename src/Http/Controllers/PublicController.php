@@ -18,7 +18,7 @@ class PublicController extends BasePublicController
 
     public function show($slug): View
     {
-        $model = Object::published()->bySlug($slug)->firstOrFail();
+        $model = Object::published()->whereSlugIs($slug)->firstOrFail();
 
         return view('objects::public.show')
             ->with(compact('model'));
