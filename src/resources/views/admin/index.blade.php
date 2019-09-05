@@ -11,6 +11,7 @@
     table="objects"
     title="objects"
     include="image"
+    appends="thumb"
     :searchable="['title']"
     :sorting="['-id']">
 
