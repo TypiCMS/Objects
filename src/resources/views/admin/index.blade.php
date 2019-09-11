@@ -13,7 +13,7 @@
     include="image"
     appends="thumb"
     :searchable="['title']"
-    :sorting="['-id']">
+    :sorting="['-title_translated']">
 
     <template slot="add-button">
         @include('core::admin._button-create', ['module' => 'objects'])
