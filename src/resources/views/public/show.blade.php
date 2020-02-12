@@ -17,8 +17,12 @@
         @isset($model->image)
         <img class="object-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
         @endisset
+        @isset($model->summary)
         <p class="object-summary">{!! nl2br($model->summary) !!}</p>
+        @endisset
+        @isset($model->body)
         <div class="object-body">{!! $model->present()->body !!}</div>
+        @endisset
         @include('files::public._documents')
         @include('files::public._images')
     </article>
