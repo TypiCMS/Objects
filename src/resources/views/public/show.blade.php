@@ -14,7 +14,9 @@
 
     <article class="object">
         <h1 class="object-title">{{ $model->title }}</h1>
-        <img class="object-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
+        @isset($model->image)
+        <img class="object-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
+        @endisset
         <p class="object-summary">{!! nl2br($model->summary) !!}</p>
         <div class="object-body">{!! $model->present()->body !!}</div>
         @include('files::public._documents')
