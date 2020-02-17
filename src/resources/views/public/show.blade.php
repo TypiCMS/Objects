@@ -14,15 +14,15 @@
 
     <article class="object">
         <h1 class="object-title">{{ $model->title }}</h1>
-        @isset($model->image)
+        @empty(!$model->image)
         <img class="object-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
-        @endisset
-        @isset($model->summary)
+        @endempty
+        @empty(!$model->summary)
         <p class="object-summary">{!! nl2br($model->summary) !!}</p>
-        @endisset
-        @isset($model->body)
+        @endempty
+        @empty(!$model->body)
         <div class="object-body">{!! $model->present()->body !!}</div>
-        @endisset
+        @endempty
         @include('files::public._documents')
         @include('files::public._images')
     </article>
