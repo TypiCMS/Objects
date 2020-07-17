@@ -61,16 +61,25 @@ class ApiController extends BaseApiController
         ]);
     }
 
+    /**
+     * @deprecated
+     */
     public function files(Object $object): Collection
     {
         return $object->files;
     }
 
+    /**
+     * @deprecated
+     */
     public function attachFiles(Object $object, Request $request): JsonResponse
     {
         return $object->attachFiles($request);
     }
 
+    /**
+     * @deprecated
+     */
     public function detachFile(Object $object, File $file): void
     {
         $object->detachFile($file);
