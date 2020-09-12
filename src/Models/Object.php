@@ -20,7 +20,7 @@ class Object extends Base
 
     protected $presenter = ModulePresenter::class;
 
-    protected $guarded = ['id', 'exit'];
+    protected $guarded = [];
 
     public $translatable = [
         'title',
