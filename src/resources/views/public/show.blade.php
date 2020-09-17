@@ -12,7 +12,7 @@
     <header class="object-header">
         <div class="object-header-container">
             <div class="object-header-navigator">
-                @include('core::public._btn-prev-next', ['module' => 'Objects', 'model' => $model])
+                @include('core::public._items-navigator', ['module' => 'Objects', 'model' => $model])
             </div>
             <h1 class="object-title">{{ $model->title }}</h1>
         </div>
