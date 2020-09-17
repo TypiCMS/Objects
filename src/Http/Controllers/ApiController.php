@@ -29,7 +29,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Object $object, Request $request)
+    protected function updatePartial(object $object, Request $request)
     {
         foreach ($request->only('status') as $key => $content) {
             if ($object->isTranslatableAttribute($key)) {
@@ -44,7 +44,7 @@ class ApiController extends BaseApiController
         $object->save();
     }
 
-    public function destroy(Object $object)
+    public function destroy(object $object)
     {
         $object->delete();
     }
@@ -52,7 +52,7 @@ class ApiController extends BaseApiController
     /**
      * @deprecated
      */
-    public function files(Object $object): Collection
+    public function files(object $object): Collection
     {
         return $object->files;
     }
@@ -60,7 +60,7 @@ class ApiController extends BaseApiController
     /**
      * @deprecated
      */
-    public function attachFiles(Object $object, Request $request): JsonResponse
+    public function attachFiles(object $object, Request $request): JsonResponse
     {
         return $object->attachFiles($request);
     }
@@ -68,7 +68,7 @@ class ApiController extends BaseApiController
     /**
      * @deprecated
      */
-    public function detachFile(Object $object, File $file): void
+    public function detachFile(object $object, File $file): void
     {
         $object->detachFile($file);
     }

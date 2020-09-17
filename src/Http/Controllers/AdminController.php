@@ -23,7 +23,7 @@ class AdminController extends BaseAdminController
             ->with(compact('model'));
     }
 
-    public function edit(Object $object): View
+    public function edit(object $object): View
     {
         return view('objects::admin.edit')
             ->with(['model' => $object]);
@@ -36,7 +36,7 @@ class AdminController extends BaseAdminController
         return $this->redirect($request, $object);
     }
 
-    public function update(Object $object, FormRequest $request): RedirectResponse
+    public function update(object $object, FormRequest $request): RedirectResponse
     {
         $object->update($request->validated());
 
