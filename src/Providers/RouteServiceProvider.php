@@ -20,8 +20,6 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define the routes for the application.
-     *
-     * @return null
      */
     public function map()
     {
@@ -45,11 +43,11 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
-                $router->get('objects', 'AdminController@index')->name('admin::index-objects')->middleware('can:see-all-objects');
-                $router->get('objects/create', 'AdminController@create')->name('admin::create-object')->middleware('can:create-object');
-                $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object')->middleware('can:update-object');
-                $router->post('objects', 'AdminController@store')->name('admin::store-object')->middleware('can:create-object');
-                $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object')->middleware('can:update-object');
+                $router->get('objects', 'AdminController@index')->name('admin::index-objects')->middleware('can:read objects');
+                $router->get('objects/create', 'AdminController@create')->name('admin::create-object')->middleware('can:create objects');
+                $router->get('objects/{object}/edit', 'AdminController@edit')->name('admin::edit-object')->middleware('can:update objects');
+                $router->post('objects', 'AdminController@store')->name('admin::store-object')->middleware('can:create objects');
+                $router->put('objects/{object}', 'AdminController@update')->name('admin::update-object')->middleware('can:update objects');
             });
 
             /*
@@ -57,13 +55,13 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('objects', 'ApiController@index')->middleware('can:see-all-objects');
-                    $router->patch('objects/{object}', 'ApiController@updatePartial')->middleware('can:update-object');
-                    $router->delete('objects/{object}', 'ApiController@destroy')->middleware('can:delete-object');
+                    $router->get('objects', 'ApiController@index')->middleware('can:read objects');
+                    $router->patch('objects/{object}', 'ApiController@updatePartial')->middleware('can:update objects');
+                    $router->delete('objects/{object}', 'ApiController@destroy')->middleware('can:delete objects');
 
-                    $router->get('objects/{object}/files', 'ApiController@files')->middleware('can:update-object');
-                    $router->post('objects/{object}/files', 'ApiController@attachFiles')->middleware('can:update-object');
-                    $router->delete('objects/{object}/files/{file}', 'ApiController@detachFile')->middleware('can:update-object');
+                    $router->get('objects/{object}/files', 'ApiController@files')->middleware('can:update objects');
+                    $router->post('objects/{object}/files', 'ApiController@attachFiles')->middleware('can:update objects');
+                    $router->delete('objects/{object}/files/{file}', 'ApiController@detachFile')->middleware('can:update objects');
                 });
             });
         });
