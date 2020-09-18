@@ -22,12 +22,12 @@ class RouteServiceProvider extends ServiceProvider
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('objects')) {
-                $router->middleware('public')->group(function (Router $router) use ($page) {
-                    $options = $page->private ? ['middleware' => 'auth'] : [];
+                $middleware = $page->private ? ['public', 'auth'] : ['public'];
+                $router->middleware($middleware)->group(function (Router $router) use ($page) {
                     foreach (locales() as $lang) {
                         if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                            $router->get($uri, $options + ['uses' => [PublicController::class, 'index']])->name($lang.'::index-objects');
-                            $router->get($uri.'/{slug}', $options + ['uses' => [PublicController::class, 'show']])->name($lang.'::object');
+                            $router->get($uri, [PublicController::class, 'index'])->name($lang.'::index-objects');
+                            $router->get($uri.'/{slug}', [PublicController::class, 'show'])->name($lang.'::object');
                         }
                     }
                 });
