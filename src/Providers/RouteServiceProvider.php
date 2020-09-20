@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
                 $router->get('objects', [AdminController::class, 'index'])->name('admin::index-objects')->middleware('can:read objects');
                 $router->get('objects/create', [AdminController::class, 'create'])->name('admin::create-object')->middleware('can:create objects');
-                $router->get('objects/{object}/edit', [AdminController::class, 'edit'])->name('admin::edit-object')->middleware('can:update objects');
+                $router->get('objects/{object}/edit', [AdminController::class, 'edit'])->name('admin::edit-object')->middleware('can:read objects');
                 $router->post('objects', [AdminController::class, 'store'])->name('admin::store-object')->middleware('can:create objects');
                 $router->put('objects/{object}', [AdminController::class, 'update'])->name('admin::update-object')->middleware('can:update objects');
             });

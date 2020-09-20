@@ -4,7 +4,7 @@ return [
     'objects' => [
         'read objects' => 'Read',
         'create objects' => 'Create',
-        'update objects' => 'Edit',
+        'update objects' => 'Update',
         'delete objects' => 'Delete',
     ],
 ];
