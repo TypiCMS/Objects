@@ -12,6 +12,7 @@
     title="objects"
     include="image"
     appends="thumb"
+    :exportable="true"
     :searchable="['title']"
     :sorting="['title_translated']">
 
