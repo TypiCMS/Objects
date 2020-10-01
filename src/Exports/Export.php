@@ -1,4 +1,4 @@
-ObjectsExport<?php
+<?php
 
 namespace TypiCMS\Modules\Objects\Exports;
 
@@ -14,7 +14,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Objects\Models\Object;
 
-class ObjectsExport implements WithColumnFormatting, ShouldAutoSize, FromCollection, WithHeadings, WithMapping
+class Export implements WithColumnFormatting, ShouldAutoSize, FromCollection, WithHeadings, WithMapping
 {
     protected $collection;
 
