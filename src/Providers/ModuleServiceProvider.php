@@ -20,7 +20,7 @@ class ModuleServiceProvider extends ServiceProvider
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['objects' => ['linkable_to_page']], $modules));
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'objects');
+        $this->loadViewsFrom(null, 'objects');
 
         $this->publishes([
             __DIR__.'/../database/migrations/create_objects_table.php.stub' => getMigrationFileName('create_objects_table'),
