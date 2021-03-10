@@ -23,7 +23,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadViewsFrom(null, 'objects');
 
         $this->publishes([
-            __DIR__.'/../../database/migrations/create_objects_table.php.stub' => getMigrationFileName('create_objects_table'),
+            __DIR__.'/../database/migrations/create_objects_table.php.stub' => getMigrationFileName('create_objects_table'),
         ], 'migrations');
 
         AliasLoader::getInstance()->alias('Objects', Objects::class);
