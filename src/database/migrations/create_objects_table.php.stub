@@ -2,13 +2,12 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateObjectsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return null
      */
     public function up()
     {
@@ -27,8 +26,6 @@ class CreateObjectsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return null
      */
     public function down()
     {
