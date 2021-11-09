@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Objects\Providers;
 
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
@@ -12,13 +13,12 @@ use TypiCMS\Modules\Objects\Models\Object;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.objects');
         $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
 
-        $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['objects' => ['linkable_to_page']], $modules));
+        config(['typicms.modules.objects' => ['linkable_to_page']]);
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'objects');
 
@@ -31,28 +31,20 @@ class ModuleServiceProvider extends ServiceProvider
         // Observers
         Object::observe(new SlugObserver());
 
-        /*
-         * Sidebar view composer
-         */
-        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
+        View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
         /*
          * Add the page in the view.
          */
-        $this->app->view->composer('objects::public.*', function ($view) {
+        View::composer('objects::public.*', function ($view) {
             $view->page = TypiCMS::getPageLinkedToModule('objects');
         });
     }
 
-    public function register()
+    public function register(): void
     {
-        $app = $this->app;
+        $this->app->register(RouteServiceProvider::class);
 
-        /*
-         * Register route service provider
-         */
-        $app->register(RouteServiceProvider::class);
-
-        $app->bind('Objects', Object::class);
+        $this->app->bind('Objects', Object::class);
     }
 }
