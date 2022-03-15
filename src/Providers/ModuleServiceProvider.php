@@ -15,16 +15,11 @@ class ModuleServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.objects');
-        $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
-
-        config(['typicms.modules.objects' => ['linkable_to_page']]);
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.modules.objects');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'objects');
 
-        $this->publishes([
-            __DIR__.'/../database/migrations/create_objects_table.php.stub' => getMigrationFileName('create_objects_table'),
-        ], 'migrations');
+        $this->publishes([__DIR__.'/../database/migrations/create_objects_table.php.stub' => getMigrationFileName('create_objects_table')], 'typicms-migrations');
 
         AliasLoader::getInstance()->alias('Objects', Objects::class);
 

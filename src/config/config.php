@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'per_page' => 30,
+    'linkable_to_page' => true,
+    'per_page' => 230,
     'order' => [
         'id' => 'desc',
     ],

@@ -19,8 +19,8 @@ class SidebarViewComposer
             $group->weight = 30;
             $group->addItem(__('Objects'), function (SidebarItem $item) {
                 $item->id = 'objects';
-                $item->icon = config('typicms.objects.sidebar.icon');
-                $item->weight = config('typicms.objects.sidebar.weight');
+                $item->icon = config('typicms.modules.objects.sidebar.icon');
+                $item->weight = config('typicms.modules.objects.sidebar.weight');
                 $item->route('admin::index-objects');
                 $item->append('admin::create-object');
             });
