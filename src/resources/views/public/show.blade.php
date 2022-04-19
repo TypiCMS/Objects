@@ -24,7 +24,7 @@
         @endempty
         @empty(!$model->image)
         <picture class="object-picture">
-            <img class="object-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
+            <img class="object-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
             @empty(!$model->image->description)
             <legend class="object-picture-legend">{{ $model->image->description }}</legend>
             @endempty
